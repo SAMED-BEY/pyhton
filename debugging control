@@ -1,0 +1,27 @@
+import sys 
+
+liste= [7,'SAMED',0,5,"8"]
+
+
+
+for x in liste:
+    try:
+        print ("sayı : "+ str(x))
+        islem= 2/int(x) *3.14
+        print ("işlem = " + str(islem))
+    
+    except ValueError:  # sadeeve ValueError hatasında çalısır
+        print("degisken : "+ str(x) )
+        print("  tip uyuşmazlıgından  dolayı calısmıyor")
+    
+    
+    except :          #  daha genel bir ifadede kullanabiliriz 
+# fakında olmadıgımız hataları gorebilmek için kullanablir
+        print("degisken : "+ str(x) )
+        print(str(sys.exc_info()[0]) +" hatasından dolayı calısmıyor")
+    
+    
+    finally: # en son muhakkak çalısır örneğin dosyalarla çalısıyoruz 
+        #programda herhangi sorun oldugunda finally z
+        #kullanarak dosyayı kapatabiliriz
+        print("islem sureci bitmistir ") 

@@ -1,0 +1,50 @@
+# SAMED-BEY
+import pandas as pd 
+url = "http://bit.ly/uforeports"
+data = pd.read_csv(url)
+
+#print(data)
+# print(data.columns)  'City', 'Colors Reported', 'Shape Reported', 'State', 'Time' 
+
+print(data.shape) # veri ile ilgili bize bilgi verir (satır sayısı, sutun sayısı)
+
+#print(data.City) # city kolonunu yazdrırı
+print(data.notnull().sum()) # kolonlardakı veri olanların sayısını veriyor
+
+print ("***********")
+
+print(data.isnull().sum()) # kolonlarda bos olan veri sayısını veriyor
+
+print ("***********")
+
+print(data[data.City.isnull()])  #city null olan verileri satır olarak yazdırıyo
+
+print ("***********")
+
+print(data.dropna()) # bir veri bozuk yada null olursa satırı komple siliyor
+
+print ("***********")
+
+print(data.dropna(how="any"))  #yukardakının içinde defult olarak bulunuyor
+
+print ("***********")
+
+print(data.dropna(how="all"))  # tum satır null  olmalı silmesi için
+
+print ("***********")
+
+print(data.dropna(subset=['City','Colors Reported' ],
+                          how = "all")) # bu ifadede all dediğimizden [] içinde olanları her ikiside null olmaıs gerekır
+                                        #egerki any yazsakdık herhangi ikinden biri null ile satrı silicekti
+
+data.fillna(value ='bu devirde UFO mu kaldı dogalgaz var ',inplace=True) 
+#tum verideki nulları value karşılındakı degerle değistiriyor
+
+data['Shape Reported'].fillna(value = 'adamlar girmemis yaavvv',inplace =True)
+#nuul olan yerleri value de yazdıgımız degerle inplace true diyerek değistiriyoz 
+
+
+print (data['Shape Reported'].value_counts(dropna=False)) # ufonun şeklinin sayı olarak drop etmeden goster diyoruz
+
+
+#verimizi variable explorer den bakabiliriz

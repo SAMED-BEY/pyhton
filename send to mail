@@ -1,3 +1,7 @@
+https://caliksamedgp.blogspot.com/2020/07/send-to-mail-with-python.html
+SAMED ÇALIK
+
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText

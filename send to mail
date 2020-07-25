@@ -1,0 +1,44 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import sys
+
+dosya= open("mailler.txt","r") #maiileri gondereceğimiz kişilerin listesi
+#NOTE:  you must  creating mailler.txt  and must put in mail address 
+print("dosya acildi")
+liste=dosya.readlines()
+
+for i in liste: # liste boyunca işlemler devam edicek
+    
+# Gmail email sunucusuna bağlanıyoruz
+    try:
+        mail = smtplib.SMTP("smtp.gmail.com",587)
+        mail.ehlo()
+        mail.starttls()
+        mail.login("mymail@gmail.com", "password")
+
+        mesaj = MIMEMultipart()
+        mesaj["From"] = "mymail@gmail.com"           # Gönderen
+        mesaj["Subject"] = "Python Smtp ile Mail Gönderme"    # Konusu
+        mesaj["To"] =i
+
+        body = "bir adam varmış canı sikilan  Python ile smtp ve email modülünü kullanarak mail gönderiyorum."
+        
+#body gondermek istediğimiz maili yazıyoruz
+
+        body_text = MIMEText(body, "plain")  
+        mesaj.attach(body_text)
+
+        mail.sendmail(mesaj["From"], mesaj["To"], mesaj.as_string())
+        print("Mail başarılı bir şekilde gönderildi.")
+        mail.close()
+
+# Eğer mesaj gönderirken hata olursa, hata mesajını konsole yazdırıyorum.
+
+    except:
+        print("Hata:", sys.exc_info()[0])
+        print(i)
+        print("kisisine gonderilmedi----------")
+
+dosya.close()
+print("dosya kapandi")
